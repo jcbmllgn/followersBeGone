@@ -71,10 +71,10 @@ function myLoop () {
 
     i++;
 
-    if ( 10 === i ) { // item_length
+    if ( 60 === i ) { // item_length
       $("html, body").animate({ scrollTop: $(document).height() }, "fast", function(){
         item_length = $('#stream-items-id div.stream-item').length;
-          if ( 10 === i ) {
+          if ( 60 === i ) {
             alert('done. item_length: ' + item_length + ' and i: ' + i );
           } else {
             myLoop();
@@ -89,6 +89,7 @@ function myLoop () {
 
 myLoop();
 
+
 function deleteFollower(limit) {
 
   THEcounter = 0;
@@ -99,9 +100,9 @@ function deleteFollower(limit) {
 
     if (rating < limit) {
       THEcounter++;
-      // $('#stream-items-id div.stream-item:nth-child(' + itentifier + ') .user-dropdown .dropdown-menu .block-text').trigger('click');
+      $('#stream-items-id div.stream-item:nth-child(' + itentifier + ') .user-dropdown .dropdown-menu .block-text').trigger('click');
 
-      $('#stream-items-id div.stream-item:nth-child(' + itentifier + ')').css('background','blue');
+      // $('#stream-items-id div.stream-item:nth-child(' + itentifier + ')').css('background','blue');
     }
   });
 };
@@ -110,6 +111,19 @@ deleteFollower(2.5);
 
       // This will delete a user:
       // $('#stream-items-id div.stream-item:nth-child(' + itentifier + ') .user-dropdown .dropdown-menu .block-text').trigger('click');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
