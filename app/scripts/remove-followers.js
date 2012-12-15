@@ -48,7 +48,7 @@ function checkVariable(i, newClass) {
   }
 };
 
-function myLoop () {
+function followerScan () {
    setTimeout(function () {
     newClass = 'count' + i;
     var $currItem = $('#stream-items-id div.stream-item:nth-child(' + i + ')'),
@@ -71,23 +71,23 @@ function myLoop () {
 
     i++;
 
-    if ( 60 === i ) { // item_length
+    if ( 90 === i ) { // item_length
       $("html, body").animate({ scrollTop: $(document).height() }, "fast", function(){
         item_length = $('#stream-items-id div.stream-item').length;
-          if ( 60 === i ) {
+          if ( 90 === i ) {
             alert('done. item_length: ' + item_length + ' and i: ' + i );
           } else {
-            myLoop();
+            followerScan();
           }
       });
     } else {
-      myLoop();
+      followerScan();
     }
 
    }, 550)
 }
 
-myLoop();
+followerScan();
 
 
 function deleteFollower(limit) {
@@ -101,6 +101,7 @@ function deleteFollower(limit) {
     if (rating < limit) {
       THEcounter++;
       $('#stream-items-id div.stream-item:nth-child(' + itentifier + ') .user-dropdown .dropdown-menu .block-text').trigger('click');
+      $('#stream-items-id div.stream-item:nth-child(' + itentifier + ') .follow-button .unblock-text').trigger('click');
 
       // $('#stream-items-id div.stream-item:nth-child(' + itentifier + ')').css('background','blue');
     }
