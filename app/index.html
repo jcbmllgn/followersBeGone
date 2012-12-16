@@ -19,7 +19,9 @@
     <body>
         <div class="wrapper">
             <div class="masthead">
-                <h4 class="muted "><span>90,000</span> fake Twitter followers removed to date</h4>
+                <h4 class="muted pull-left"><span>90,000</span> fake Twitter followers removed to date</h4>
+                <a href="https://twitter.com/share" class="twitter-share-button pull-right" data-via="jcbmllgn">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                 <div style="clear:both;"></div>
             </div>
 
@@ -27,7 +29,7 @@
 
             <div class="jumbotron">
                 <h1>The only way to remove fake twitter followers in bulk</h1>
-                <p class="lead">Simply copy and paste the script into the Chrome or Firebug console, the script will guide you through the rest. Get started below:</p>
+                <p class="lead">Simply copy and paste the script into the Chrome or Firebug console, the script will guide you through the rest. Get started below</p>
             </div>
 
             <div class="directions">
@@ -49,21 +51,39 @@
                     <p>In Twitter, open up the Chrome console, paste the script, hit enter on your keyboard, and you'll be guided from there.</p>
                 </div>
             </div>
+            <div style="clear:both;"></div>
+        </div>
 
             <div class="divider">
                 <div class="myRow">
-                    <a class="menuBlock text-center">How does it work and can I read the code?</a>
-                    <a class="menuBlock text-center">Why only Chrome and Firefox Firebug?</a>
-                    <a class="menuBlock text-center">Is there a video walk through? (There is)</a>
-                    <a class="menuBlock text-center">Why isn't this a bookmarklet?</a>
+<!--                     <a href="#the-code" class="menuBlock text-center">How does it work and can I read the code?</a>
+                    <a href="#why-chrome" class="menuBlock text-center">Why only Chrome and Firefox Firebug?</a>
+                    <a href="#video" class="menuBlock text-center">Is there a video walk through? (There is)</a>
+                    <a href="#why-chrome" class="menuBlock text-center">Who made this?</a> -->
                 </div>
             </div>
 
 
+            <div id="the-code" class="answer-section">
+                <h3>How it works.</h3>
+                <p>At a high level this works by scraping the <a target="http://twitter.com/followers">followers page</a> and collecting information about each of your followers (eg number of followers they have, number of people they are following, and the number of times they've tweeted). This information is then run through a very simple algorithm to decide if the user is fake or not.</p>
+                <p>If you want to see the full source for the script or wish to improve it, you can find it <a target="_blank" href="https://github.com/jcbmllgn/followersBeGone">on Github</a>.</p>
+            </div>
 
+            <div id="why-chrome" class="answer-section">
+                <h3>Why not a bookmarklet?</h3>
+                <p>Because Twitter blocks all bookmarklets (do you know a way around this? <a href="mailto:jacobdmulligan@gmail.com">Let me know</a>.), the only way to run Javascript on twitter.com is through the console which is only eaisly available through Chrome and the Firefox plugin <a href="http://getfirebug.com/" target="_blank">Firebug</a>.</p>
+            </div>
 
-        </div>
+            <div class="answer-section">
+                <h3>Privacy</h3>
+                <p>All personal information is kept private, the only information that is tracked is the number of followers you delete, how many followers you had at the beginning, and how long it takes for you to finish. Collecting this data helps us improve the script.</p>
+            </div>
 
+            <div class="answer-section">
+                <p>Have a questions? <a href="mailto:jacobdmulligan@gmail.com">Let me know</a>.</p>
+                <p>Build by <a target="_blank" href="http://jacob.io">Jacob Mulligan</a></p>
+            </div>
 
 
         <!--[if lt IE 7]>
