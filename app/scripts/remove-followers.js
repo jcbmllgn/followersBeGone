@@ -100,10 +100,10 @@ function deleteFollower(limit) {
 
     if (rating < limit) {
       THEcounter++;
-      $('#stream-items-id div.stream-item:nth-child(' + itentifier + ') .user-dropdown .dropdown-menu .block-text').trigger('click');
-      $('#stream-items-id div.stream-item:nth-child(' + itentifier + ') .follow-button .unblock-text').trigger('click');
+      // $('#stream-items-id div.stream-item:nth-child(' + itentifier + ') .user-dropdown .dropdown-menu .block-text').trigger('click');
+      // $('#stream-items-id div.stream-item:nth-child(' + itentifier + ') .follow-button .unblock-text').trigger('click');
 
-      // $('#stream-items-id div.stream-item:nth-child(' + itentifier + ')').css('background','blue');
+      $('#stream-items-id div.stream-item:nth-child(' + itentifier + ')').css('background','blue');
     }
   });
 };
@@ -112,17 +112,6 @@ deleteFollower(2.5);
 
       // This will delete a user:
       // $('#stream-items-id div.stream-item:nth-child(' + itentifier + ') .user-dropdown .dropdown-menu .block-text').trigger('click');
-
-
-
-
-
-
-
-
-
-
-
 
 
 
