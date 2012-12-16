@@ -45,6 +45,46 @@
   }
 }
 
+.divider {
+  width: 100%;
+  height: 100px;
+  background-color: lighten(#333333,75%);
+
+  position: absolute;
+  top: 575px;
+  left: 0px;
+
+  .myRow {
+    width: 960px;
+    margin: 0px auto;
+
+    .menuBlock {
+      height: 77px;
+      width: 220px;
+      margin-left: 17px;
+      float: left;
+      padding-top: 23px;
+
+      a {
+        padding-top: 15px;
+        line-height: 25px;
+        font-size: 18px;
+        font-weight: bold;
+        color: lighten(#333333, 15%);
+
+        &:hover {
+          text-decoration: none;
+          color: lighten(#333333, 5%);
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: lighten(#333333,65%);
+      }
+    }
+  }
+}
 
 
 
