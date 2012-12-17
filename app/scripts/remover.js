@@ -30,7 +30,7 @@ function checkRating(item_id) {
 function setRating(i, newClass) {
   rating = parseInt(followers)/parseInt(following)*parseInt(tweets);
 
-  if (parseInt(tweets) > 100 || parseInt(followers) > 400) {
+  if (parseInt(tweets) > 200 || parseInt(followers) > 400) {
     rating = 100000;
   }
 

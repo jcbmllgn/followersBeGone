@@ -28,7 +28,7 @@
                     <h3>Step 1:</h3>
                     <p>Copy the following script to your clipbaord:</p>
 <textarea class="scripty">
-// Copy everything in this text area. Script begins on the next line:
+  // Copy everything in this text area. Script begins on the next line:
 var limit = 1.5,
     $removedItems,
     i = 0,
@@ -60,7 +60,7 @@ function checkRating(item_id) {
 function setRating(i, newClass) {
   rating = parseInt(followers)/parseInt(following)*parseInt(tweets);
 
-  if (parseInt(tweets) > 100 || parseInt(followers) > 400) {
+  if (parseInt(tweets) > 200 || parseInt(followers) > 400) {
     rating = 100000;
   }
 
@@ -223,8 +223,6 @@ $('#start-scan').click(function(){
   $numLeft = $('#follower-tracker span.numLeft');
   followerScan(50);
 });
-
-
 </textarea>
                     <br>
                     <a href="https://github.com/jcbmllgn/followersBeGone/blob/master/app/scripts/remover.js" target="_blank" class="smaller">Click here to view script on github.</a>
@@ -237,7 +235,7 @@ $('#start-scan').click(function(){
 
                 <div class="span4 text-center">
                     <h3>Step 3:</h3>
-                    <p>In Twitter, open up the Chrome console, paste the script, hit enter on your keyboard, and you'll be guided from there.</p>
+                    <p>Open up the Chrome console, paste the script, hit enter on your keyboard, and you'll be guided from there.</p>
                 </div>
             </div>
             <div style="clear:both;"></div>
