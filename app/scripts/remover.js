@@ -1,22 +1,26 @@
-// Followers be gone script:
+// Followers be gone script, copy everything in this text area.
 
-var limit = 60,
+var limit = 2.5,
     $removedItems,
-    i = 1,
+    i = 0,
+    r = 0,
     count = 0,
-    num = 1,
-    rating_array = [[0,0]],
+    num = 0,
+    rating_array = [],
     followers = 0,
     numFake = 0,
+    $soFar,
+    $item,
+    $numLeft,
+    endEarly = false,
     following = 0,
     userFollowers = $('.profile-card').find("[data-nav='followers'] strong").text(),
     userFollowers = parseInt( userFollowers.replace(/,/g, "") ),
+    upperLimit = userFollowers * .95,
     rating = 0,
-    THEcounter=0,
     $currItem,
-    userFollowers   = $('.profile-card').find("[data-nav='followers'] strong").text(),
-    userFollowers   = parseInt( userFollowers.replace(/,/g, "") ),
-    newDashboard = '<div class="dashboard new-dashboard" style="position: fixed;"><div class="module enhanced-media-thumbnails "><div class="flex-module media-thumbnails large recent_photos"><div class="directions-block"><h2>Directions for removing twitter followers:</h2><br><p>We need to scan all of your followers to see which are fake and real.</p><br><button class="btn" id="start-scan">Click here to get started!</button><br><br><p style="font-size: 12px;">Because you have ' + userFollowers + ' followers, this will take about ' + Math.floor( userFollowers*.01 ) + ' minutes.</p></div></div></div></div>'
+    scanLeft = userFollowers,
+    newDashboard = '<div class="dashboard new-dashboard" style="position: fixed;"><div class="module enhanced-media-thumbnails "><div class="flex-module media-thumbnails large recent_photos"><div class="directions-block"><h2>Directions for removing twitter followers:</h2><br><p>We need to scan all of your followers to see which are fake and real.</p><br><button class="btn" id="start-scan">Click here to get started!</button><br><br><p style="font-size: 12px;">Because you have ' + userFollowers + ' followers, this will take about ' + Math.floor( userFollowers*.02 ) + ' minutes.</p></div></div></div></div>'
 
 
 
@@ -27,31 +31,28 @@ function checkRating(item_id) {
 function setRating(i, newClass) {
   rating = parseInt(followers)/parseInt(following)*parseInt(tweets);
 
-  rating_array.push([rating,num,username]);
-
-  setRed(num, rating);
-
   if(rating < 2.5) {
+    rating_array.push([rating,num]);
+    setRed(num);
     numFake++;
   }
 
   num++;
+  scanLeft--;
+  update(numFake, scanLeft);
 }
 
-function setRed() {
+function update(numFake, scanLeft) {
+  $soFar.text(numFake);
+  $numLeft.text(scanLeft);
+}
 
-  $.each(rating_array, function() {
-    rating = this[0];
-    itentifier = this[1];
-    var $item = $('#stream-items-id div.stream-item:nth-child(' + itentifier + ')');
-    $item.find('user-actions').css('opacity' , '0')
-    if (rating < 2.5 && !$item.hasClass('setRed')) {
-      $item
-        .css({'background-color' : '#f2dede' , 'border' : '1px solid #eed3d7' , 'position' : 'relative'})
-        .addClass('setRed')
-        .append('<button class="btn noblock" data-ratingID="' + itentifier + '" style="position: absolute; top: 9px; right: 10px;"><span>Don\'t remove me!</span></button>');
-    }
-  });
+function setRed(num) {
+
+  $('#stream-items-id div.stream-item:nth-child(' + num + ')')
+    .css({'background-color' : '#f2dede' , 'border' : '1px solid #eed3d7' , 'position' : 'relative'})
+    .addClass('setRed' + num)
+    .append('<button class="btn noblock" data-ratingID="' + num + '" style="position: absolute; top: 9px; right: 10px;"><span>Don\'t remove me!</span></button>');
 
   // If user clicks on the "Don't block" button, this will change the rating
   $('button.noblock').click(function(){
@@ -68,7 +69,6 @@ function setRed() {
 }
 
 function deleteFollower(limit) {
-  THEcounter = 0;
   $('.popover').remove();
 
   $.each(rating_array, function() {
@@ -76,14 +76,11 @@ function deleteFollower(limit) {
     itentifier = this[1];
 
     if (rating < limit) {
-      THEcounter++;
-      $currItem = $('#stream-items-id div.stream-item:nth-child(' + itentifier + ')')
-      // $currItem
+      $currItem = $('#stream-items-id div.stream-item:nth-child(' + itentifier + ')');
+      // $currItem // delete!!!!!
       //   .find('.user-dropdown .dropdown-menu .block-text').trigger('click')
       //   .find('.follow-button .unblock-text').trigger('click')
       $currItem.css('background','red');
-
-      $('.fake-count-down').text(THEcounter);
     }
   });
 
@@ -106,21 +103,26 @@ function checkVariable(i, newClass) {
     following   = $('#profile_popup').find("[data-nav='following'] strong").text(),
     following   = parseInt( following.replace(/,/g, "") ),
     followers   = $('#profile_popup').find("[data-nav='followers'] strong").text(),
-    followers   = parseInt( followers.replace(/,/g, "") ),
-    username    = $('#profile_popup').find("h2.fullname a").text();
+    followers   = parseInt( followers.replace(/,/g, "") );
 
     if( newClass && following > 1 || followers > 1 ){
-      setRating(i, newClass);
+      setRating(i);
     } else {
-      setTimeout("checkVariable()" , 200); // call myself again in 50 msecs
+      setTimeout("checkVariable()" , 50); // call myself again in 50 msecs
     }
   }
   else {
-      setTimeout("checkVariable()" , 200); // call myself again in 50 msecs
+      setTimeout("checkVariable()" , 50); // call myself again in 50 msecs
   }
 };
 
 function followerScan (num_scan) {
+
+  $('#end-scan').click(function(){
+    $('#follower-tracker').fadeOut();
+    endEarly = true;
+  });
+
    setTimeout(function () {
     newClass = 'count' + i;
     $currItem = $('#stream-items-id div.stream-item:nth-child(' + i + ')');
@@ -130,33 +132,23 @@ function followerScan (num_scan) {
       .find('strong.fullname').trigger('click')
       .addClass(newClass);
 
-    tweets      = $('#profile_popup').find("[data-nav='profile'] strong").text(),
-    tweets      = parseInt( tweets.replace(/,/g, "") ),
-    following   = $('#profile_popup').find("[data-nav='following'] strong").text(),
-    following   = parseInt( following.replace(/,/g, "") ),
-    followers   = $('#profile_popup').find("[data-nav='followers'] strong").text()
-    followers   = parseInt( followers.replace(/,/g, "") );
+    setTimeout("checkVariable(i, newClass)" , 150);
 
-    setTimeout("checkVariable(i, newClass)" , 250);
+    if( i >= item_length-15 ){
+      $('#stream-items-id div.stream-item').find('.user-actions').css('opacity' , '0');
+      $("html, body").animate({ scrollTop: $(document).height() }, "fast");
+    }
 
-    $("html, body").animate({ scrollTop: $(document).height() }, "fast");
+    if ( upperLimit === i || endEarly === true) {
+      if (endEarly === false) {
+        alert('Scan is done, read the directions box for the next (and last) step.');
+      }
 
-    i++;
-
-    if ( item_length === i ) { // item_length
-      $("html, body").animate({ scrollTop: $(document).height() }, "fast", function(){
-        item_length = $('#stream-items-id div.stream-item').length;
-          if ( item_length === i ) {
-            // alert('Scan is done, read the directions box for the next (and last) step.');
-            deleteStep();
-          } else {
-            followerScan();
-          }
-      });
+      deleteStep();
     } else {
       followerScan();
     }
-
+    i++;
    }, 550)
 }
 
@@ -168,7 +160,6 @@ function deleteStep() {
       .append('<h2>You have <span class="fake-count">' + numFake + '</span> fake followers!</h2><br><p>Scroll down the list on the right and you\'ll see that all fake followers are highlighted in red. If any of these followers where wrongly marked as fake, just click on the "Don\'t block me" button then move on.</p><br><p>Now that we\'ve selected the fake followers, click this button to remove them, note that this CANNOT be undone!</p><br><br><button class="btn primary-btn" id="delete-followers">Delete fake followers</button><br><br><p style="font-style: italic;">Depending on the number of followers you have, this may take a couple minutes to process!</p>').fadeIn(); // Inserts directions for next step.
 
     $('#delete-followers').click(function(){
-    // $('body').append('<div style="position: fixed;left: 0px;top: 0px;width: 100%;height: 100%;background-color: rgba(62, 62, 62, 0.6);" class="popover"></div><div style="z-index: 1000000;position: absolute;left: 30%;width: 400px;padding: 30px 10px;min-height: 175px;margin: 100px auto 0px;text-align: center;background-color: white;" class="wait-box"><h1>Removed <span id="fake-count-down">0</span> followers out of ' + numFake +'</h1></div>')
       deleteFollower(2.5);
     });
   });
@@ -190,16 +181,8 @@ function undoDashboard() {
 makeDashboard();
 
 $('#start-scan').click(function(){
+  $('body').append('<div style="position: fixed;top: 60px;right: 50px;z-index:999999;font-weight: bold;color: white;background: #3e3e3e;padding: 20px;font-size: 20px;" id="follower-tracker"><p><span class="soFar">0</span> fake followers so far.</p><br><br><p>Followers left to scan: <span class="numLeft">' + userFollowers + '</span></p><br><br><button class="btn" id="end-scan">Click here to end scan early</button><br><br><p style="font-size:14px;font-weight:normal;">If the scan starts slowing down, you can<br>end it early, delete current fake followers,<br>then rescan..</p></div>');
+  $soFar = $('#follower-tracker span.soFar');
+  $numLeft = $('#follower-tracker span.numLeft');
   followerScan(50);
 });
-
-
-
-
-
-
-
-
-
-
-
