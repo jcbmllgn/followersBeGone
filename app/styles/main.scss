@@ -1,30 +1,15 @@
 .wrapper {
   width: 960px;
   margin: 0px auto;
-
-  hr {
-    margin: 5px 0 50px;
-  }
 }
 
 .text-center {
   text-align: center;
 }
 
-.masthead {
-
-  h4 {
-    text-align: center;
-  }
-
-  .twitter-share-button {
-    margin-top: 11px;
-  }
-}
-
 .jumbotron {
   width: 750px;
-  margin: 40px auto 55px;
+  margin: 30px auto 55px;
 
   text-align: center;
 
@@ -33,14 +18,9 @@
     line-height: 55px;
     margin-bottom: 10px;
   }
-
-  h4 {
-    margin-bottom: 20px;
-  }
 }
 
 .directions {
-
   textarea {
     width: 200px;
     height: 45px;
@@ -55,28 +35,13 @@
   background-color: lighten(#333333,75%);
   margin-top: 70px;
 
-  .myRow {
-    width: 960px;
-    margin: 0px auto;
+  h1 {
+    color: lighten(#333333, 40%);
+    text-align: center;
+    padding-top: 27px;
 
-    .menuBlock {
-      height: 77px;
-      width: 220px;
-      margin-left: 17px;
-      float: left;
-      padding-top: 23px;
-      line-height: 25px;
-      font-size: 18px;
-      font-weight: bold;
-      color: lighten(#333333, 15%);
-
-
-      &:hover {
-        text-decoration: none;
-        color: lighten(#333333, 5%);
-        cursor: pointer;
-        background: lighten(#333333,65%);
-      }
+    span {
+      color: lighten(#333333, 30%);
     }
   }
 }

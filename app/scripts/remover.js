@@ -1,4 +1,4 @@
-// Settings:
+// Followers be gone script:
 
 var limit = 60,
     $removedItems,
