@@ -29,8 +29,7 @@
                     <p>Copy the following script to your clipbaord:</p>
 <textarea class="scripty">
 // Copy everything in this text area. Script begins on the next line:
-
-var limit = 2.5,
+var limit = 1.5,
     $removedItems,
     i = 0,
     num = 0,
@@ -61,7 +60,12 @@ function checkRating(item_id) {
 function setRating(i, newClass) {
   rating = parseInt(followers)/parseInt(following)*parseInt(tweets);
 
-  if(rating < 2.5) {
+  if (parseInt(tweets) > 100 || parseInt(followers) > 400) {
+    rating = 100000;
+  }
+
+
+  if(rating < limit) {
     rating_array.push([rating,numFake,num]);
     setRed(num, numFake);
     numFake++;
@@ -182,7 +186,7 @@ function followerScan (num_scan) {
       followerScan();
     }
     i++;
-   }, 350)
+   }, 275)
 }
 
 function deleteStep() {
@@ -193,7 +197,7 @@ function deleteStep() {
       .append('<h2>You have <span class="fake-count">' + numFake + '</span> fake followers!</h2><br><p>Scroll down the list on the right and you\'ll see that all fake followers are highlighted in red. If any of these followers where wrongly marked as fake, just click on the "Don\'t block me" button then move on.</p><br><p>Now that we\'ve selected the fake followers, click this button to remove them, note that this CANNOT be undone!</p><br><br><button class="btn primary-btn" id="delete-followers">Delete fake followers</button><br><br><p style="font-style: italic;">Depending on the number of followers you have, this may take up to a couple minutes to process!</p>').fadeIn(); // Inserts directions for next step.
 
     $('#delete-followers').click(function(){
-      deleteFollower(2.5);
+      deleteFollower(limit);
     });
   });
 }
@@ -221,7 +225,6 @@ $('#start-scan').click(function(){
 });
 
 
-
 </textarea>
                     <br>
                     <a href="https://github.com/jcbmllgn/followersBeGone/blob/master/app/scripts/remover.js" target="_blank" class="smaller">Click here to view script on github.</a>
@@ -241,13 +244,13 @@ $('#start-scan').click(function(){
         </div>
 
         <div class="divider">
-            <h1><span>90,000</span> followers removed to date</h1>
+            <h1><span>xx,xxx</span> followers removed to date</h1>
         </div>
 
-        <div class="answer-section">
+<!--         <div class="answer-section">
             <h3>Video walk through</h3>
 
-        </div>
+        </div> -->
 
         <div class="answer-section">
             <h3>How it works</h3>
@@ -275,9 +278,9 @@ $('#start-scan').click(function(){
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
 
-        <script src="scripts/main.js" type="text/javascript"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="scripts/vendor/jquery.min.js"><\/script>')</script>
+        <script src="/scripts/main.js" type="text/javascript"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

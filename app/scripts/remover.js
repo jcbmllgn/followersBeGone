@@ -1,6 +1,5 @@
 // Copy everything in this text area. Script begins on the next line:
-
-var limit = 2.5,
+var limit = 1.5,
     $removedItems,
     i = 0,
     num = 0,
@@ -31,7 +30,12 @@ function checkRating(item_id) {
 function setRating(i, newClass) {
   rating = parseInt(followers)/parseInt(following)*parseInt(tweets);
 
-  if(rating < 2.5) {
+  if (parseInt(tweets) > 100 || parseInt(followers) > 400) {
+    rating = 100000;
+  }
+
+
+  if(rating < limit) {
     rating_array.push([rating,numFake,num]);
     setRed(num, numFake);
     numFake++;
@@ -152,7 +156,7 @@ function followerScan (num_scan) {
       followerScan();
     }
     i++;
-   }, 350)
+   }, 275)
 }
 
 function deleteStep() {
@@ -163,7 +167,7 @@ function deleteStep() {
       .append('<h2>You have <span class="fake-count">' + numFake + '</span> fake followers!</h2><br><p>Scroll down the list on the right and you\'ll see that all fake followers are highlighted in red. If any of these followers where wrongly marked as fake, just click on the "Don\'t block me" button then move on.</p><br><p>Now that we\'ve selected the fake followers, click this button to remove them, note that this CANNOT be undone!</p><br><br><button class="btn primary-btn" id="delete-followers">Delete fake followers</button><br><br><p style="font-style: italic;">Depending on the number of followers you have, this may take up to a couple minutes to process!</p>').fadeIn(); // Inserts directions for next step.
 
     $('#delete-followers').click(function(){
-      deleteFollower(2.5);
+      deleteFollower(limit);
     });
   });
 }
