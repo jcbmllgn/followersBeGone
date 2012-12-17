@@ -28,14 +28,14 @@
                     <h3>Step 1:</h3>
                     <p>Copy the following script to your clipbaord:</p>
 <textarea class="scripty">
-// Followers be gone script, copy everything in this text area.
+// Copy everything in this text area. Script begins on the next line:
 
 var limit = 2.5,
     $removedItems,
     i = 0,
+    num = 0,
     r = 0,
     count = 0,
-    num = 0,
     rating_array = [],
     followers = 0,
     numFake = 0,
@@ -50,7 +50,7 @@ var limit = 2.5,
     rating = 0,
     $currItem,
     scanLeft = userFollowers,
-    newDashboard = '<div class="dashboard new-dashboard" style="position: fixed;"><div class="module enhanced-media-thumbnails "><div class="flex-module media-thumbnails large recent_photos"><div class="directions-block"><h2>Directions for removing twitter followers:</h2><br><p>We need to scan all of your followers to see which are fake and real.</p><br><button class="btn" id="start-scan">Click here to get started!</button><br><br><p style="font-size: 12px;">Because you have ' + userFollowers + ' followers, this will take about ' + Math.floor( userFollowers*.02 ) + ' minutes.</p></div></div></div></div>'
+    newDashboard = '<div class="dashboard new-dashboard" style="position: fixed;"><div class="module enhanced-media-thumbnails "><div class="flex-module media-thumbnails large recent_photos"><div class="directions-block"><h2>Directions for removing twitter followers:</h2><br><p>We need to scan all of your followers to see which are fake and real.</p><br><button class="btn" id="start-scan">Click here to get started!</button><br><br><p style="font-size: 12px;">Because you have ' + userFollowers + ' followers, this will take about ' + Math.floor( userFollowers*.0125 ) + ' minutes.</p></div></div></div></div>'
 
 
 
@@ -62,13 +62,17 @@ function setRating(i, newClass) {
   rating = parseInt(followers)/parseInt(following)*parseInt(tweets);
 
   if(rating < 2.5) {
-    rating_array.push([rating,num]);
-    setRed(num);
+    rating_array.push([rating,numFake,num]);
+    setRed(num, numFake);
     numFake++;
   }
 
   num++;
   scanLeft--;
+  if (scanLeft <= 1) {
+    endEarly = true;
+    $('#follower-tracker').fadeOut();
+  }
   update(numFake, scanLeft);
 }
 
@@ -77,12 +81,12 @@ function update(numFake, scanLeft) {
   $numLeft.text(scanLeft);
 }
 
-function setRed(num) {
+function setRed(num,numFake) {
 
   $('#stream-items-id div.stream-item:nth-child(' + num + ')')
     .css({'background-color' : '#f2dede' , 'border' : '1px solid #eed3d7' , 'position' : 'relative'})
-    .addClass('setRed' + num)
-    .append('<button class="btn noblock" data-ratingID="' + num + '" style="position: absolute; top: 9px; right: 10px;"><span>Don\'t remove me!</span></button>');
+    .addClass('setRed' + numFake)
+    .append('<button class="btn noblock" data-ratingID="' + numFake + '" style="position: absolute; top: 9px; right: 10px;"><span>Don\'t remove me!</span></button>');
 
   // If user clicks on the "Don't block" button, this will change the rating
   $('button.noblock').click(function(){
@@ -93,7 +97,7 @@ function setRed(num) {
 
     $(this)
       .removeClass('btn noblock')
-      .text('Unblocked')
+      .text('Will not be blocked')
       .parent().css({'background-color' : 'white' , 'border' : '1px solid #e8e8e8'})
   });
 }
@@ -103,11 +107,11 @@ function deleteFollower(limit) {
 
   $.each(rating_array, function() {
     rating = this[0];
-    itentifier = this[1];
+    itentifier = this[2];
 
     if (rating < limit) {
       $currItem = $('#stream-items-id div.stream-item:nth-child(' + itentifier + ')');
-      // $currItem // delete!!!!!
+      // $currItem // Comment these lines out for testing!
       //   .find('.user-dropdown .dropdown-menu .block-text').trigger('click')
       //   .find('.follow-button .unblock-text').trigger('click')
       $currItem.css('background','red');
@@ -138,11 +142,11 @@ function checkVariable(i, newClass) {
     if( newClass && following > 1 || followers > 1 ){
       setRating(i);
     } else {
-      setTimeout("checkVariable()" , 50); // call myself again in 50 msecs
+      setTimeout("checkVariable()" , 25); // call myself again in 50 msecs
     }
   }
   else {
-      setTimeout("checkVariable()" , 50); // call myself again in 50 msecs
+      setTimeout("checkVariable()" , 25); // call myself again in 50 msecs
   }
 };
 
@@ -162,7 +166,7 @@ function followerScan (num_scan) {
       .find('strong.fullname').trigger('click')
       .addClass(newClass);
 
-    setTimeout("checkVariable(i, newClass)" , 150);
+    setTimeout("checkVariable(i, newClass)" , 25);
 
     if( i >= item_length-15 ){
       $('#stream-items-id div.stream-item').find('.user-actions').css('opacity' , '0');
@@ -173,13 +177,12 @@ function followerScan (num_scan) {
       if (endEarly === false) {
         alert('Scan is done, read the directions box for the next (and last) step.');
       }
-
       deleteStep();
     } else {
       followerScan();
     }
     i++;
-   }, 550)
+   }, 350)
 }
 
 function deleteStep() {
@@ -187,7 +190,7 @@ function deleteStep() {
     $('.close-modal-background-target').trigger('click');
     $('.directions-block')
       .fadeOut().empty()
-      .append('<h2>You have <span class="fake-count">' + numFake + '</span> fake followers!</h2><br><p>Scroll down the list on the right and you\'ll see that all fake followers are highlighted in red. If any of these followers where wrongly marked as fake, just click on the "Don\'t block me" button then move on.</p><br><p>Now that we\'ve selected the fake followers, click this button to remove them, note that this CANNOT be undone!</p><br><br><button class="btn primary-btn" id="delete-followers">Delete fake followers</button><br><br><p style="font-style: italic;">Depending on the number of followers you have, this may take a couple minutes to process!</p>').fadeIn(); // Inserts directions for next step.
+      .append('<h2>You have <span class="fake-count">' + numFake + '</span> fake followers!</h2><br><p>Scroll down the list on the right and you\'ll see that all fake followers are highlighted in red. If any of these followers where wrongly marked as fake, just click on the "Don\'t block me" button then move on.</p><br><p>Now that we\'ve selected the fake followers, click this button to remove them, note that this CANNOT be undone!</p><br><br><button class="btn primary-btn" id="delete-followers">Delete fake followers</button><br><br><p style="font-style: italic;">Depending on the number of followers you have, this may take up to a couple minutes to process!</p>').fadeIn(); // Inserts directions for next step.
 
     $('#delete-followers').click(function(){
       deleteFollower(2.5);
