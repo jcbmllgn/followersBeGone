@@ -143,10 +143,10 @@ function followerScan (num_scan) {
 
     i++;
 
-    if ( limit === i ) { // item_length
+    if ( item_length === i ) { // item_length
       $("html, body").animate({ scrollTop: $(document).height() }, "fast", function(){
         item_length = $('#stream-items-id div.stream-item').length;
-          if ( limit === i ) {
+          if ( item_length === i ) {
             // alert('Scan is done, read the directions box for the next (and last) step.');
             deleteStep();
           } else {
