@@ -22,6 +22,8 @@ var limit = 1.5,
     newDashboard = '<div class="dashboard new-dashboard" style="position: fixed;"><div class="module enhanced-media-thumbnails "><div class="flex-module media-thumbnails large recent_photos"><div class="directions-block"><h2>Directions for removing twitter followers:</h2><br><p>We need to scan all of your followers to see which are fake and real.</p><br><button class="btn" id="start-scan">Click here to get started!</button><br><br><p style="font-size: 12px;">Because you have ' + userFollowers + ' followers, this will take about ' + Math.floor( userFollowers*.0125 ) + ' minutes.</p></div></div></div></div>'
 
 
+// Thanks for taking a peak at the code, if you have any questions or suggestions, shoot me an email at jacobdmulligan@gmail.com
+
 
 function checkRating(item_id) {
   return rating_array[item_id][0];
@@ -86,8 +88,8 @@ function deleteFollower(limit) {
     if (rating < limit) {
       $currItem = $('#stream-items-id div.stream-item:nth-child(' + itentifier + ')');
       // $currItem // Comment these lines out for testing!
-      //   .find('.user-dropdown .dropdown-menu .block-text').trigger('click')
-      //   .find('.follow-button .unblock-text').trigger('click')
+        // .find('.user-dropdown .dropdown-menu .block-text').trigger('click')
+        // .find('.follow-button .unblock-text').trigger('click')
       $currItem.css('background','red');
     }
   });
@@ -100,6 +102,12 @@ function postDeletion() {
     .fadeOut().empty()
     .append('<h2><span class="fake-count">' + numFake + '</span> fake followers deleted!</h3><br><p>Those dasterdly fake followers are now gone for good! Thanks for using this script, I\'d be humbuled if you <a href="http://twitter.com/jcbmllgn">follow me on twitter</a> or if you tweeted about this tool:<br><br></p><a href="http://FollowersBeGone.com>FollowersBeGone</a>:<br><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://FollowersBeGone.com" data-text="Remove your fake twitter followers with FollowersBeGone.com!" data-via="jcbmllgn">FollowersBeGone</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><br><br><a href="#" onclick="location.reload();">Click to reload page</a><br><a target="_blank" href="https://github.com/jcbmllgn/followersBeGone">View source on Github</a><br><a href="mailto:jacobdmulligan@gmail.com">Email me</a><p>-Jacob</p>').fadeIn(); // Inserts directions for next step.
   $('.noblock').removeClass('btn').text('No longer follows you');
+
+
+  // load iframe that trackes stats: number of followers you have, fake followers that I found, fake followers that you actually deleted, how many followers you have, how many times you've tweeted
+  // Your twitter handle is not being tracked!
+
+  $('body').append('http://followersBeGone.com/tracker.php?userFollowers=' + userFollowers + '&numFake=' numFake );
 }
 
 function checkVariable(i, newClass) {
@@ -193,3 +201,6 @@ $('#start-scan').click(function(){
   $numLeft = $('#follower-tracker span.numLeft');
   followerScan(50);
 });
+
+
+// Thanks for taking a peak at the code, if you have any questions or suggestions, shoot me an email at jacobdmulligan@gmail.com
