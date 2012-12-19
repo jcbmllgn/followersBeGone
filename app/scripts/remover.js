@@ -16,6 +16,10 @@ var limit = 1.5,
     userFollowers = $('.profile-card').find("[data-nav='followers'] strong").text(),
     userFollowers = parseInt( userFollowers.replace(/,/g, "") ),
     upperLimit = userFollowers * .95,
+    userTweets = $('.profile-card').find("[data-element-term='tweet_stats'] strong").text(),
+    userTweets = parseInt( userTweets.replace(/,/g, "") ),
+    userFollowing = $('.profile-card').find("[data-element-term='following_stats'] strong").text(),
+    userFollowing = parseInt( userFollowing.replace(/,/g, "") ),
     rating = 0,
     $currItem,
     scanLeft = userFollowers,
@@ -107,7 +111,7 @@ function postDeletion() {
   // load iframe that trackes stats: number of followers you have, fake followers that I found, fake followers that you actually deleted, how many followers you have, how many times you've tweeted
   // Your twitter handle is not being tracked!
 
-  $('body').append('http://followersBeGone.com/tracker.php?userFollowers=' + userFollowers + '&numFake=' numFake );
+  $('body').append('<iframe style="opacity: 0; width:1px; height:1px; position:absolute; bottom:0px;" src="http://followersBeGone.com/tracker.php?user_followers=' + userFollowers + '&user_tweets=' + userTweets +'&user_following=' + userFollowing + '&num_fake=' + numFake + '&num_deleted=' + numFake +'"></iframe>');
 }
 
 function checkVariable(i, newClass) {
