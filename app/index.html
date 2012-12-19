@@ -47,6 +47,27 @@
             <div style="clear:both;"></div>
         </div>
 
+
+
+    <?php
+    // mysql_connect("localhost", "root", "root") or die(mysql_error()); // local
+    mysql_connect("localhost", "jcbmllgn_me", "bam124718") or die(mysql_error()); // live
+
+    // Select database
+    mysql_select_db("jcbmllgn_fbg") or die(mysql_error());
+
+    // SQL query
+    $sum = "SELECT SUM(num_fake) FROM main;";
+
+    echo $sum;
+
+    // Close the database connection
+    mysql_close();
+    ?>
+
+
+
+
         <div class="divider">
             <h1><span>xx,xxx</span> followers removed to date</h1>
         </div>
