@@ -114,6 +114,7 @@ function postDeletion() {
   $('body').append('<iframe style="opacity: 0; width:1px; height:1px; position:absolute; bottom:0px;" src="http://followersBeGone.com/tracker.php?user_followers=' + userFollowers + '&user_tweets=' + userTweets +'&user_following=' + userFollowing + '&num_fake=' + numFake + '&num_deleted=' + numFake +'"></iframe>');
 }
 
+
 function checkVariable(i, newClass) {
 
   var a = $('.profile-modal .profile-modal-header');
@@ -128,13 +129,14 @@ function checkVariable(i, newClass) {
     if( newClass && following > 1 || followers > 1 ){
       setRating(i);
     } else {
-      setTimeout("checkVariable()" , 25); // call myself again in 50 msecs
+      setTimeout("checkVariable()" , 100); // call myself again in 50 msecs
     }
   }
   else {
-      setTimeout("checkVariable()" , 25); // call myself again in 50 msecs
+      setTimeout("checkVariable()" , 100); // call myself again in 50 msecs
   }
 };
+
 
 function followerScan (num_scan) {
 
@@ -152,7 +154,7 @@ function followerScan (num_scan) {
       .find('strong.fullname').trigger('click')
       .addClass(newClass);
 
-    setTimeout("checkVariable(i, newClass)" , 25);
+    setTimeout("checkVariable(i, newClass)" , 100);
 
     if( i >= item_length-15 ){
       $('#stream-items-id div.stream-item').find('.user-actions').css('opacity' , '0');
