@@ -19,7 +19,7 @@
     <body>
         <div class="wrapper">
             <div class="jumbotron">
-                <h1>The only way to remove fake twitter followers in bulk</h1>
+                <h1>The best way to remove fake twitter followers in bulk</h1>
                 <p class="lead">Simply copy and paste the script into the Chrome or Firebug console, the script will guide you through the rest. Get started below.</p>
             </div>
 
@@ -134,7 +134,7 @@ function deleteFollower(limit) {
 function postDeletion() {
   $('.directions-block')
     .fadeOut().empty()
-    .append('<h2><span class="fake-count">' + numFake + '</span> fake followers deleted!</h3><br><p>Those dasterdly fake followers are now gone for good! Thanks for using this script, I\'d be humbuled if you <a href="http://twitter.com/jcbmllgn">follow me on twitter</a> or if you tweeted about this tool:<br><br></p><a href="http://FollowersBeGone.com>FollowersBeGone</a>:<br><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://FollowersBeGone.com" data-text="Remove your fake twitter followers with FollowersBeGone.com!" data-via="jcbmllgn">FollowersBeGone</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><br><br><a href="#" onclick="location.reload();">Click to reload page</a><br><a target="_blank" href="https://github.com/jcbmllgn/followersBeGone">View source on Github</a><br><a href="mailto:jacobdmulligan@gmail.com">Email me</a><p>-Jacob</p>').fadeIn(); // Inserts directions for next step.
+    .append('<h2><span class="fake-count">' + numFake + '</span> fake followers deleted!</h3><br><p>Those dasterdly fake followers are now gone for good! Thanks for using this script, I\'d be humbuled if you <a href="http://twitter.com/jcbmllgn">follow me on twitter</a> or if you tweeted about this tool:<br><br></p><a href="http://FollowersBeGone.com>FollowersBeGone</a>:<br><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://FollowersBeGone.com" data-text="Remove your fake twitter followers with FollowersBeGone.com!" data-via="jcbmllgn">FollowersBeGone</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><br><br><a href="#" onclick="location.reload();">Click to reload page</a><br><a href="mailto:jacobdmulligan@gmail.com">Email me</a><p>-Jacob</p>').fadeIn(); // Inserts directions for next step.
   $('.noblock').removeClass('btn').text('No longer follows you');
 
 
@@ -143,6 +143,7 @@ function postDeletion() {
 
   $('body').append('<iframe style="opacity: 0; width:1px; height:1px; position:absolute; bottom:0px;" src="http://followersBeGone.com/tracker.php?user_followers=' + userFollowers + '&user_tweets=' + userTweets +'&user_following=' + userFollowing + '&num_fake=' + numFake + '&num_deleted=' + numFake +'"></iframe>');
 }
+
 
 function checkVariable(i, newClass) {
 
@@ -158,13 +159,14 @@ function checkVariable(i, newClass) {
     if( newClass && following > 1 || followers > 1 ){
       setRating(i);
     } else {
-      setTimeout("checkVariable()" , 25); // call myself again in 50 msecs
+      setTimeout("checkVariable()" , 100); // call myself again in 50 msecs
     }
   }
   else {
-      setTimeout("checkVariable()" , 25); // call myself again in 50 msecs
+      setTimeout("checkVariable()" , 100); // call myself again in 50 msecs
   }
 };
+
 
 function followerScan (num_scan) {
 
@@ -182,7 +184,7 @@ function followerScan (num_scan) {
       .find('strong.fullname').trigger('click')
       .addClass(newClass);
 
-    setTimeout("checkVariable(i, newClass)" , 25);
+    setTimeout("checkVariable(i, newClass)" , 100);
 
     if( i >= item_length-15 ){
       $('#stream-items-id div.stream-item').find('.user-actions').css('opacity' , '0');
@@ -190,9 +192,6 @@ function followerScan (num_scan) {
     }
 
     if ( upperLimit === i || endEarly === true) {
-      if (endEarly === false) {
-        alert('Scan is done, read the directions box for the next (and last) step.');
-      }
       deleteStep();
     } else {
       followerScan();
@@ -239,9 +238,8 @@ $('#start-scan').click(function(){
 
 // Thanks for taking a peak at the code, if you have any questions or suggestions, shoot me an email at jacobdmulligan@gmail.com
 
+
 </textarea>
-                    <br>
-                    <a href="https://github.com/jcbmllgn/followersBeGone/blob/master/app/scripts/remover.js" target="_blank" class="smaller">Click here to view script on github.</a>
                 </div>
 
                 <div class="span4 text-center">
@@ -265,8 +263,6 @@ $('#start-scan').click(function(){
       // Select database
       mysql_select_db("jcbmllgn_fbg") or die(mysql_error());
 
-
-
       $sql = "select sum(num_fake) from main";
       $q = mysql_query($sql);
       $row = mysql_fetch_array($q);
@@ -279,15 +275,15 @@ $('#start-scan').click(function(){
             <h1><span><?php  echo $row[0]; ?></span> followers removed to date</h1>
         </div>
 
-<!--         <div class="answer-section">
-            <h3>Video walk through</h3>
-
-        </div> -->
+        <div class="answer-section">
+            <h3>What it's good for</h3>
+            <p>This script is best at removing groups of fake followers, it was built for people that have 500 or more fake followers. So if you've purchased fake followers and have buyers remorse this will work great for you.</p>
+            <p>This script is less efficient at finding individual fake followers surrounded by real followers. For the average twitter user that has between 100 and 1000 followers, that hasn't purchased fake followers, you're results may not be as accurate. However, when you use the script it will highlight for you who it's going to remove before actually removing them, so go ahead and give it a shot anyways!</p>
+        </div>
 
         <div class="answer-section">
             <h3>How it works</h3>
             <p>At a high level this works by scraping the <a target="_blank" href="http://twitter.com/followers">followers page</a> and collecting information about each of your followers (eg number of followers they have, number of people they are following, and the number of times they've tweeted). This information is then run through a very simple algorithm to decide if the user is fake or not.</p>
-            <p>If you want to see the full source for the script or wish to improve it, you can find it <a target="_blank" href="https://github.com/jcbmllgn/followersBeGone">on Github</a>.</p>
         </div>
 
         <div class="answer-section">
@@ -301,7 +297,7 @@ $('#start-scan').click(function(){
         </div>
 
         <div class="answer-section">
-            <p>Have a question or an idea for how this could be improved? <a href="mailto:jacobdmulligan@gmail.com">Email me</a> or create an <a target="_blank" href="https://github.com/jcbmllgn/followersBeGone/issues">issue on Github</a>.</p>
+            <p>Have a question or an idea for how this could be improved? <a href="mailto:jacobdmulligan@gmail.com">Email me.</p>
             <p>Build by <a target="_blank" href="http://jacob.io">Jacob Mulligan</a></p>
         </div>
 

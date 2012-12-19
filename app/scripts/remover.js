@@ -162,9 +162,6 @@ function followerScan (num_scan) {
     }
 
     if ( upperLimit === i || endEarly === true) {
-      if (endEarly === false) {
-        alert('Scan is done, read the directions box for the next (and last) step.');
-      }
       deleteStep();
     } else {
       followerScan();
