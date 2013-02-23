@@ -19,7 +19,7 @@
     <body>
         <div class="wrapper">
             <div class="jumbotron">
-                <h1>The best way to remove fake twitter followers in bulk</h1>
+                <h1>Eaisly remove fake twitter followers in bulk</h1>
                 <p class="lead">Simply copy and paste the script into the Chrome or Firebug console, the script will guide you through the rest. Get started below.</p>
             </div>
 
@@ -121,9 +121,9 @@ function deleteFollower(limit) {
 
     if (rating < limit) {
       $currItem = $('#stream-items-id div.stream-item:nth-child(' + itentifier + ')');
-      // $currItem // Comment these lines out for testing!
-        // .find('.user-dropdown .dropdown-menu .block-text').trigger('click')
-        // .find('.follow-button .unblock-text').trigger('click')
+      $currItem // Comment these lines out for testing!
+        .find('.user-dropdown .dropdown-menu .block-text').trigger('click')
+        .find('.follow-button .unblock-text').trigger('click')
       $currItem.css('background','red');
     }
   });
@@ -134,7 +134,7 @@ function deleteFollower(limit) {
 function postDeletion() {
   $('.directions-block')
     .fadeOut().empty()
-    .append('<h2><span class="fake-count">' + numFake + '</span> fake followers deleted!</h3><br><p>Those dasterdly fake followers are now gone for good! Thanks for using this script, I\'d be humbuled if you <a href="http://twitter.com/jcbmllgn">follow me on twitter</a> or if you tweeted about this tool:<br><br></p><a href="http://FollowersBeGone.com>FollowersBeGone</a>:<br><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://FollowersBeGone.com" data-text="Remove your fake twitter followers with FollowersBeGone.com!" data-via="jcbmllgn">FollowersBeGone</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><br><br><a href="#" onclick="location.reload();">Click to reload page</a><br><a href="mailto:jacobdmulligan@gmail.com">Email me</a><p>-Jacob</p>').fadeIn(); // Inserts directions for next step.
+    .append('<h2><span class="fake-count">' + numFake + '</span> fake followers deleted!</h3><br><p>Those dasterdly fake followers are now gone for good! Thanks for using this script, I\'d be humbuled if you <a href="http://twitter.com/jcbmllgn">follow me on twitter</a> or if you tweeted about this tool:<br><br></p><a href="http://FollowersBeGone.com>FollowersBeGone</a>:<br><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://FollowersBeGone.com" data-text="Remove your fake twitter followers with FollowersBeGone.com!" data-via="jcbmllgn">FollowersBeGone</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><br><br><a href="#" onclick="location.reload();">Click to reload page</a><br><a target="_blank" href="https://github.com/jcbmllgn/followersBeGone">View source on Github</a><br><a href="mailto:jacobdmulligan@gmail.com">Email me</a><p>-Jacob</p>').fadeIn(); // Inserts directions for next step.
   $('.noblock').removeClass('btn').text('No longer follows you');
 
 
@@ -298,7 +298,7 @@ $('#start-scan').click(function(){
 
         <div class="answer-section">
             <p>Have a question or an idea for how this could be improved? <a href="mailto:jacobdmulligan@gmail.com">Email me.</p>
-            <p>Build by <a target="_blank" href="http://jacob.io">Jacob Mulligan</a></p>
+            <p>Built by <a target="_blank" href="http://jacob.io">Jacob Mulligan</a></p>
         </div>
 
 

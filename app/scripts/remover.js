@@ -91,9 +91,9 @@ function deleteFollower(limit) {
 
     if (rating < limit) {
       $currItem = $('#stream-items-id div.stream-item:nth-child(' + itentifier + ')');
-      // $currItem // Comment these lines out for testing!
-        // .find('.user-dropdown .dropdown-menu .block-text').trigger('click')
-        // .find('.follow-button .unblock-text').trigger('click')
+      $currItem // Comment these lines out for testing!
+        .find('.user-dropdown .dropdown-menu .block-text').trigger('click')
+        .find('.follow-button .unblock-text').trigger('click')
       $currItem.css('background','red');
     }
   });
