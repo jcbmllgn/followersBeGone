@@ -147,7 +147,7 @@ function followerScan (num_scan) {
 
    setTimeout(function () {
     newClass = 'count' + i;
-    $currItem = $('#stream-items-id div.stream-item:nth-child(' + i + ')');
+    $currItem = $('#stream-items-id .stream-item:nth-child(' + i + ')');
     var item_length = $('#stream-items-id div.stream-item').length;
 
     $currItem
